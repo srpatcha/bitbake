@@ -84,7 +84,7 @@ def pending_hash_index(tid, rqdata):
     (mc, fn, taskname, taskfn) = split_tid_mcfn(tid)
     pn = rqdata.dataCaches[mc].pkg_fn[taskfn]
     h = rqdata.runtaskentries[tid].unihash
-    return pn + ":" + "taskname" + h
+    return pn + ":" + taskname + h
 
 class RunQueueStats:
     """
@@ -1927,7 +1927,7 @@ class RunQueueExecute:
             self.max_loadfactor = float(self.max_loadfactor)
             if self.max_loadfactor <= 0:
                 bb.fatal("Invalid BB_LOADFACTOR_MAX %s, needs to be greater than zero." % (self.max_loadfactor))
-            
+
         # List of setscene tasks which we've covered
         self.scenequeue_covered = set()
         # List of tasks which are covered (including setscene ones)
