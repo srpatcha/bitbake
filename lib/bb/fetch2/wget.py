@@ -291,7 +291,7 @@ class Wget(FetchMethod):
         class FixedHTTPRedirectHandler(urllib.request.HTTPRedirectHandler):
             """
             urllib2.HTTPRedirectHandler before 3.13 has two flaws:
-            
+
             It resets the method to GET on redirect when we want to follow
             redirects using the original method (typically HEAD). This was fixed
             in 759e8e7.
@@ -480,8 +480,8 @@ class Wget(FetchMethod):
         """
         Run fetch checkstatus to get directory information
         """
-        f = tempfile.NamedTemporaryFile()
-        with tempfile.TemporaryDirectory(prefix="wget-index-") as workdir, tempfile.NamedTemporaryFile(dir=workdir, prefix="wget-listing-") as f:
+        with tempfile.TemporaryDirectory(prefix="wget-index-") as workdir, \
+             tempfile.NamedTemporaryFile(dir=workdir, prefix="wget-listing-") as f:
             fetchcmd = self.basecmd
             fetchcmd += " --output-document=%s '%s'" % (f.name, uri)
             try:
@@ -521,7 +521,7 @@ class Wget(FetchMethod):
                     valid = 1
                 elif self._vercmp(version, newver) < 0:
                     version = newver
-                
+
         pupver = re.sub('_', '.', version[1])
 
         bb.debug(3, "*** %s -> UpstreamVersion = %s (CurrentVersion = %s)" %
