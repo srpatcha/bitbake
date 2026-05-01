@@ -835,17 +835,6 @@ overrides::
    VARIABLE = ""
    VARIABLE:someoverride = "myclass"
 
-Another method is by using :ref:`anonymous Python
-<bitbake-user-manual/bitbake-user-manual-metadata:Anonymous Python Functions>`.
-Here is an example::
-
-   python () {
-       if condition == value:
-           d.setVar('VARIABLE', 'myclass')
-       else:
-           d.setVar('VARIABLE', '')
-   }
-
 Alternatively, you could use an inline Python expression in the
 following form::
 
