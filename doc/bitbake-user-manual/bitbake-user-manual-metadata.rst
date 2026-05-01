@@ -829,9 +829,7 @@ Here is an example::
 
    inherit_defer ${VARNAME}
 
-If ``VARNAME`` is
-going to be set, it needs to be set before the ``inherit_defer`` statement is
-parsed. One way to achieve a conditional inherit in this case is to use
+One way to achieve a conditional inherit in this case is to use
 overrides::
 
    VARIABLE = ""
