@@ -832,8 +832,13 @@ Here is an example::
 One way to achieve a conditional inherit in this case is to use
 overrides::
 
-   VARIABLE = ""
-   VARIABLE:someoverride = "myclass"
+   VARNAME = ""
+   VARNAME:someoverride = "myclass"
+
+:ref:`inherit_defer <ref-bitbake-user-manual-metadata-inherit-defer>`
+defers the evaluation of ``${VARNAME}`` until the end of
+parsing. Assuming ``someoverride`` is in :term:`OVERRIDES`, ``${VARNAME}``
+expands to ``myclass``, which is then inherited.
 
 Alternatively, you could use an inline Python expression in the
 following form::
