@@ -81,7 +81,6 @@ class Crate(Wget):
         if host == 'crates.io':
             ud.url = "https://static.crates.io/crates/%s/%s/download" % (name, version)
             ud.versionsurl = 'https://index.crates.io/' + self._generate_index_path(name)
-            self.latest_versionstring = self.latest_versionstring_from_index
         else:
             ud.url = "https://%s/%s/%s/download" % (host, name, version)
             ud.versionsurl = "https://%s/%s/versions" % (host, name)
@@ -158,7 +157,16 @@ class Crate(Wget):
 
     def latest_versionstring(self, ud, d):
         """
-        Return the latest version available when versionsurl is the [name]/versions URL.
+        Return the latest upstream version, dispatching to the appropriate
+        parser based on the versionsurl format.
+        """
+        if ud.versionsurl.startswith('https://index.crates.io/'):
+            return self._latest_versionstring_from_index(ud, d)
+        return self._latest_versionstring_from_api(ud, d)
+
+    def _latest_versionstring_from_api(self, ud, d):
+        """
+        Parse the latest version from a [name]/versions JSON API response.
         """
         json_data = json.loads(self._fetch_index(ud.versionsurl, ud, d))
         versions = [(0, i["num"], "") for i in json_data["versions"]]
@@ -166,10 +174,9 @@ class Crate(Wget):
 
         return (versions[-1][1], "") if versions else ("", "")
 
-    def latest_versionstring_from_index(self, ud, d):
+    def _latest_versionstring_from_index(self, ud, d):
         """
-        Return the latest version available when versionsurl is a Cargo index
-        file.
+        Parse the latest version from a Cargo sparse index file (NDJSON).
         https://doc.rust-lang.org/cargo/reference/registry-index.html#index-files
         """
         versions = []
