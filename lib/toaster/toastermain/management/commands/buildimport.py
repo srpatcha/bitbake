@@ -325,7 +325,7 @@ class Command(BaseCommand):
                         break
                     try:
                         release = Release.objects.get(name=version)
-                    except:
+                    except Exception:
                         pass
                     break
         _log("Find_import_release:RELEASE=%s" % release.name)

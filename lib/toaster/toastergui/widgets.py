@@ -80,7 +80,7 @@ class ToasterTable(TemplateView):
         context['project_enable'] = ('1' == os.environ.get('TOASTER_BUILDSERVER'))
         try:
             context['project_specific'] = ('1' == os.environ.get('TOASTER_PROJECTSPECIFIC'))
-        except:
+        except Exception:
             context['project_specific'] = ''
 
         return context
@@ -484,7 +484,7 @@ class MostRecentBuildsView(View):
         if project_id:
             try:
                 project = Project.objects.get(pk=project_id)
-            except:
+            except Exception:
                 # if project lookup fails, assume no project
                 pass
 

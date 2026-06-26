@@ -267,7 +267,7 @@ if os.environ.get('TOASTER_DEVEL', None) is not None:
         MIDDLEWARE = ["fresh.middleware.FreshMiddleware",] + MIDDLEWARE
         INSTALLED_APPS = INSTALLED_APPS + ('fresh',)
         FRESH_ENABLED = True
-    except:
+    except ImportError:
         pass
 
 DEBUG_PANEL_ENABLED = False
@@ -289,11 +289,11 @@ if os.environ.get('TOASTER_DEVEL', None) is not None:
                 }
         }
 
-    except:
+    except ImportError:
         pass
 
 
-SOUTH_TESTS_MIGRATE = False
+SOUTH_TESTS_MIGRATE
 
 
 # We automatically detect and install applications here if

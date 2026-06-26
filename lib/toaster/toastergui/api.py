@@ -57,7 +57,7 @@ class XhrBuildRequest(View):
         try:
             bbctrl = bbcontroller.BitbakeController(br.environment)
             bbctrl.forceShutDown()
-        except:
+        except Exception:
             # We catch a bunch of exceptions here because
             # this is where the server has not had time to start up
             # and the build request or build is in transit between
@@ -923,7 +923,7 @@ class XhrCustomRecipePackages(View):
             # Make sure that package is not in the excludes set
             try:
                 recipe.excludes_set.remove(package)
-            except:
+            except Exception:
                 pass
 
         # Add the dependencies we think will be added to the recipe
@@ -943,7 +943,7 @@ class XhrCustomRecipePackages(View):
                 except package.DoesNotExist:
                     # Don't care if the package had never been excluded
                     pass
-            except:
+            except Exception:
                 logger.warning("Could not add package's suggested"
                                "dependencies to the list")
         return JsonResponse({"error": "ok"})
@@ -979,7 +979,7 @@ class XhrCustomRecipePackages(View):
                         recipe.excludes_set.add(r)
                     else:
                         recipe.appends_set.remove(r)
-                except:
+                except Exception:
                     pass
 
             return JsonResponse({"error": "ok"})

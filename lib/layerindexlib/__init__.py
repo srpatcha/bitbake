@@ -1370,7 +1370,7 @@ def sort_entry(item):
             newitem.sort(key=lambda obj: obj['id'])
             for index, _ in enumerate(newitem):
                 newitem[index] = sort_entry(newitem[index])
-    except:
+    except Exception:
         logger.error('Sort failed for item %s' % type(item))
         pass
 

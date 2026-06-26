@@ -112,7 +112,7 @@ class Command(BaseCommand):
                             print("Importing custom settings if present")
                             try:
                                 call_command("loaddata", "custom")
-                            except:
+                            except Exception:
                                 print("NOTE: optional fixture 'custom' not found")
 
                         # we run lsupdates after config update

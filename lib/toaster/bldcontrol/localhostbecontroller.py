@@ -334,7 +334,7 @@ class LocalhostBEController(BuildEnvironmentController):
                     isBBSetup = True
                 if (release_params[0] == '5') and (int(release_params[1]) >= 3):
                     isBBSetup = True
-            except:
+            except Exception:
                 # If release schema not recognized, then this release is in the future
                 isBBSetup = True
 
